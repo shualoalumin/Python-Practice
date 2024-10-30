@@ -22,19 +22,19 @@ window.title("사각형 넓이 계산기")
 window.geometry("300x200")
 
 # 색상 및 스타일 변경
-window.configure(bg='#2c2c2c')  # 어두운 배경
+window.configure(bg='#f8e5e5')  # 연한 분홍색 배경
 
 title_label = tk.Label(
     window,
     text="사각형 넓이 계산기",
     font=("맑은 고딕", 20, "bold"),
-    bg='#2c2c2c',
-    fg='#ffffff',  # 흰색 텍스트
+    bg='#f8e5e5',
+    fg='#4a4a4a',  # 진한 회색 텍스트
     pady=20
 )
 
 # 입력 프레임 스타일
-input_frame = tk.Frame(window, bg='#2c2c2c')
+input_frame = tk.Frame(window, bg='#f8e5e5')
 input_frame.pack(pady=20)
 
 # 레이블 스타일
@@ -42,8 +42,8 @@ unit_label = tk.Label(
     input_frame,
     text="단위 선택:",
     font=("맑은 고딕", 12),
-    bg='#2c2c2c',
-    fg='#ffffff'
+    bg='#f8e5e5',
+    fg='#4a4a4a'
 )
 
 # 단위 입력
@@ -66,13 +66,13 @@ calculate_button = tk.Button(window, text="계산하기", command=calculate_area
 calculate_button.pack(pady=10)
 
 # 결과 프레임
-result_frame = tk.Frame(window, bg='#363636', pady=20)
+result_frame = tk.Frame(window, bg='#e8b4b4', pady=20)
 result_label = tk.Label(
     result_frame,
     text="넓이: ",
     font=("맑은 고딕", 14, "bold"),
-    bg='#363636',
-    fg='#ffffff'
+    bg='#e8b4b4',
+    fg='#4a4a4a'
 )
 result_label.pack()
 
