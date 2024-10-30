@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 class KioskApp:
     def __init__(self, root):
@@ -74,10 +75,16 @@ class KioskApp:
         ttk.Button(self.cart_frame, text="결제하기", command=self.checkout).grid(row=row+1, column=0, pady=5)
     
     def checkout(self):
-        # 결제 로직 구현 예정
-        print("결제가 완료되었습니다.")
-        self.cart = []
-        self.update_cart_display()
+        # 총액 계산
+        total = sum(price for _, price in self.cart)
+        
+        # 결제 확인 팝업
+        if messagebox.askyesno("결제 확인", f"총액: {total}원\n결제하시겠습니까?"):
+            # 결제 완료 메시지
+            messagebox.showinfo("결제 완료", "결제가 완료되었습니다.")
+            # 장바구니 초기화
+            self.cart = []
+            self.update_cart_display()
 
 if __name__ == "__main__":
     root = tk.Tk()
