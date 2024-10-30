@@ -28,20 +28,30 @@ class KioskApp:
         self.create_widgets()
     
     def create_widgets(self):
-        # 메인 프레임
-        self.main_frame = ttk.Frame(self.root, padding="10")
+        # 메인 프레임 (padding 제거)
+        self.main_frame = ttk.Frame(self.root)
         self.main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # 메뉴 표시 영역
-        self.menu_frame = ttk.LabelFrame(self.main_frame, text="메뉴", padding="10")
-        self.menu_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.menu_frame = ttk.LabelFrame(self.main_frame, text="메뉴")
+        self.menu_frame.grid(row=0, column=0, rowspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # 장바구니 영역
-        self.cart_frame = ttk.LabelFrame(self.main_frame, text="장바구니", padding="10")
+        self.cart_frame = ttk.LabelFrame(self.main_frame, text="장바구니")
         self.cart_frame.grid(row=0, column=1, sticky=(tk.W, tk.E, tk.N, tk.S))
         
-        self.display_menu()
+        # 총액/결제 영역
+        self.payment_frame = ttk.LabelFrame(self.main_frame, text="결제")
+        self.payment_frame.grid(row=1, column=1, sticky=(tk.W, tk.E, tk.N, tk.S))
         
+        # 총액 표시 (내부 위젯의 padding만 유지)
+        self.total_label = ttk.Label(self.payment_frame, text="총액: 0원", font=('Helvetica', 12, 'bold'))
+        self.total_label.grid(row=0, column=0, pady=5)
+        self.checkout_button = ttk.Button(self.payment_frame, text="결제하기", command=self.checkout)
+        self.checkout_button.grid(row=1, column=0, pady=5)
+        
+        self.display_menu()
+    
     def display_menu(self):
         row = 0
         for category, items in self.menu_items.items():
@@ -60,14 +70,14 @@ class KioskApp:
     
     def update_cart_display(self):
         # 기존 장바구니 표시 내용 삭제
-        for widget in self.cart_items_frame.winfo_children():
+        for widget in self.cart_frame.winfo_children():
             widget.destroy()
             
         # 장바구니 내용 표시
         row = 0
         total = 0
         for item, price in self.cart:
-            ttk.Label(self.cart_items_frame, text=f"{item} - {price}원").grid(row=row, column=0, pady=2)
+            ttk.Label(self.cart_frame, text=f"{item} - {price}원").grid(row=row, column=0, pady=2)
             row += 1
             total += price
         
