@@ -2,8 +2,7 @@
 for dan in range(2, 10):
     for num in range(1, 10):
         print(f"{dan} x {num} = {dan * num}")
-        if num == 10
-        print()
+    print()
 
 #원하는 구구단 입력하기
 n = int(input("원하는 단수를 입력하세요:"))
