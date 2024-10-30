@@ -60,19 +60,19 @@ class KioskApp:
     
     def update_cart_display(self):
         # 기존 장바구니 표시 내용 삭제
-        for widget in self.cart_frame.winfo_children():
+        for widget in self.cart_items_frame.winfo_children():
             widget.destroy()
             
         # 장바구니 내용 표시
         row = 0
         total = 0
         for item, price in self.cart:
-            ttk.Label(self.cart_frame, text=f"{item} - {price}원").grid(row=row, column=0, pady=2)
+            ttk.Label(self.cart_items_frame, text=f"{item} - {price}원").grid(row=row, column=0, pady=2)
             row += 1
             total += price
         
-        ttk.Label(self.cart_frame, text=f"총액: {total}원", font=('Helvetica', 12, 'bold')).grid(row=row, column=0, pady=5)
-        ttk.Button(self.cart_frame, text="결제하기", command=self.checkout).grid(row=row+1, column=0, pady=5)
+        # 총액 업데이트
+        self.total_label.config(text=f"총액: {total}원")
     
     def checkout(self):
         # 총액 계산
