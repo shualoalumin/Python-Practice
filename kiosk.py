@@ -28,6 +28,29 @@ class KioskApp:
         self.create_widgets()
     
     def create_widgets(self):
+        # 스타일 설정
+        style = ttk.Style()
+        
+        # 버튼 스타일
+        style.configure("Cursor.TButton",
+                       cursor="hand2",
+                       font=('Helvetica', 12))  # 버튼 폰트 크기
+        
+        # 레이블 스타일
+        style.configure("Cursor.TLabel",
+                       cursor="arrow",
+                       font=('Helvetica', 12))  # 기본 레이블 폰트 크기
+        
+        # 카테고리 레이블용 큰 폰트 스타일
+        style.configure("CategoryLabel.TLabel",
+                       cursor="arrow",
+                       font=('Helvetica', 14, 'bold'))  # 카테고리 폰트 크기
+        
+        # 총액 표시용 큰 폰트 스타일
+        style.configure("Total.TLabel",
+                       cursor="arrow",
+                       font=('Helvetica', 16, 'bold'))  # 총액 폰트 크기
+        
         # 메인 프레임 (padding 제거)
         self.main_frame = ttk.Frame(self.root)
         self.main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -45,9 +68,18 @@ class KioskApp:
         self.payment_frame.grid(row=1, column=1, sticky=(tk.W, tk.E, tk.N, tk.S))
         
         # 총액 표시 (내부 위젯의 padding만 유지)
-        self.total_label = ttk.Label(self.payment_frame, text="총액: 0원", font=('Helvetica', 12, 'bold'))
+        self.total_label = ttk.Label(
+            self.payment_frame, 
+            text="총액: 0원", 
+            style="Total.TLabel"
+        )
         self.total_label.grid(row=0, column=0, pady=5)
-        self.checkout_button = ttk.Button(self.payment_frame, text="결제하기", command=self.checkout)
+        self.checkout_button = ttk.Button(
+            self.payment_frame, 
+            text="결제하기", 
+            command=self.checkout,
+            style="Cursor.TButton"
+        )
         self.checkout_button.grid(row=1, column=0, pady=5)
         
         self.display_menu()
@@ -55,12 +87,21 @@ class KioskApp:
     def display_menu(self):
         row = 0
         for category, items in self.menu_items.items():
-            ttk.Label(self.menu_frame, text=category, font=('Helvetica', 12, 'bold')).grid(row=row, column=0, pady=5)
+            # 카테고리 레이블에 새로운 스타일 적용
+            ttk.Label(self.menu_frame, 
+                     text=category,
+                     style="CategoryLabel.TLabel").grid(row=row, column=0, pady=5)
             row += 1
             
             for item, price in items.items():
-                ttk.Label(self.menu_frame, text=f"{item} - {price}원").grid(row=row, column=0, pady=2)
-                ttk.Button(self.menu_frame, text="추가", 
+                # 메뉴 아이템 레이블에 기본 스타일 적용
+                ttk.Label(self.menu_frame, 
+                         text=f"{item} - {price}원",
+                         style="Cursor.TLabel").grid(row=row, column=0, pady=2)
+                # 버튼에 스타일 적용
+                ttk.Button(self.menu_frame, 
+                          text="추가",
+                          style="Cursor.TButton",
                           command=lambda i=item, p=price: self.add_to_cart(i, p)).grid(row=row, column=1)
                 row += 1
     
