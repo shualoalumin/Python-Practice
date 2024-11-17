@@ -1,2 +1,2 @@
-def solution(str1, str2):
-    return ''.join(a + b for a, b in zip(str1, str2))
+def solution(num, n):
+    return 1 if num % n == 0 else 0
