@@ -1,9 +1,15 @@
-def solution(strArr):
-    result = []
-    for i in range(len(strArr)):
-        if i % 2 != 0:  # 홀수 인덱스
-            result.append(strArr[i].upper())
-        else:           # 짝수 인덱스
-            result.append(strArr[i].lower())
-    return result
 
+2
+3
+4
+5
+6
+7
+def solution(my_string):
+    answer = []
+    for i in range(len(my_string)):
+        answer.append(my_string[-i:])
+    answer.sort()
+    return answer
+
+print(solution("banana"))
