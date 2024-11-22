@@ -12,4 +12,9 @@ def solution(n):
     
 n = int(input("양의정수:"))
 print(solution(n))
+from sympy import *
+
+x = Symbol('x')
+f = 2*x + 1
+plot(f)
 
